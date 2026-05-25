@@ -63,7 +63,7 @@ export default function InteractiveDemo() {
             Watch our AI sort<br />real emails<span className="text-primary">.</span> Live.
           </h2>
           <p className="mt-5 text-muted-foreground max-w-xl">
-            Every message flows through our priority pipeline in under 400ms. No more inbox dread — just five clean buckets.
+            Every message flows through our priority pipeline in real time. No more inbox dread — just five clean buckets.
           </p>
         </motion.div>
 

@@ -1,5 +1,5 @@
 const LOGOS = [
-  "GMAIL", "OUTLOOK", "STRIPE", "SUPABASE", "ONESIGNAL", "VERCEL", "RAILWAY", "GITHUB",
+  "GMAIL", "OUTLOOK", "GOOGLE CALENDAR", "SLACK", "STRIPE", "ZOOM",
 ];
 
 export default function LogoCloud() {
@@ -7,7 +7,7 @@ export default function LogoCloud() {
     <section className="py-12 border-y border-border bg-card/30" data-testid="logo-cloud">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <p className="text-xs tracking-[0.25em] uppercase font-bold text-muted-foreground text-center mb-8">
-          Trusted by inboxes at fast-moving teams · Built on
+          Works with the tools you already use
         </p>
         <div className="overflow-hidden">
           <div className="flex gap-16 animate-marquee whitespace-nowrap">

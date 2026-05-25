@@ -76,7 +76,7 @@ export default function Hero() {
             data-testid="hero-badge"
           >
             <span className="bg-primary text-primary-foreground text-[10px] font-black tracking-widest px-2 py-0.5 rounded-full">NEW</span>
-            <span className="text-xs text-muted-foreground font-medium">Powered by next-gen AI · 99.2% accuracy</span>
+            <span className="text-xs text-muted-foreground font-medium">Powered by next-gen AI · Real-time triage</span>
           </motion.div>
 
           <motion.h1
@@ -189,7 +189,7 @@ export default function Hero() {
             className="absolute top-4 right-0 hidden md:flex items-center gap-2 backdrop-blur-md bg-black/60 border border-border rounded-full px-3 py-1.5 text-[10px] font-mono-d text-muted-foreground"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            AI ENGINE · classifying 247 emails/sec
+            AI ENGINE · classifying mail in real time
           </motion.div>
         </div>
       </motion.div>
