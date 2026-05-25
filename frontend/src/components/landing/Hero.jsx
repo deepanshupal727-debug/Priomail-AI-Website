@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Play, Shield, AlertTriangle, Mail, Skull, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Play, Shield, AlertTriangle, Mail, Skull, CheckCircle2, Zap, Sparkles, PenLine } from "lucide-react";
 
 const EMAIL_CARDS = [
   {
@@ -97,8 +97,26 @@ export default function Hero() {
             className="mt-6 text-base lg:text-lg text-muted-foreground max-w-xl leading-relaxed"
             data-testid="hero-subhead"
           >
-            PrioMail AI reads every Gmail & Outlook message, ranks them <span className="text-foreground font-semibold">Critical · Urgent · Normal · Spam · Phishing</span>, and alarms you the moment something can't wait. Never miss what matters. Never drown in what doesn't.
+            Your inbox, run by an AI that <span className="text-foreground font-semibold">triages</span>, <span className="text-foreground font-semibold">cleans</span>, and <span className="text-foreground font-semibold">replies</span> — so you don't have to. One command center for Gmail and Outlook.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="mt-6 flex flex-wrap gap-2.5"
+            data-testid="hero-pillars"
+          >
+            <span className="inline-flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1.5 text-[11px] font-semibold text-foreground/90">
+              <Zap className="w-3 h-3 text-primary" /> Priority triage
+            </span>
+            <span className="inline-flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1.5 text-[11px] font-semibold text-foreground/90">
+              <Sparkles className="w-3 h-3 text-primary" /> Inbox cleanup · save storage
+            </span>
+            <span className="inline-flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1.5 text-[11px] font-semibold text-foreground/90">
+              <PenLine className="w-3 h-3 text-primary" /> AI auto-drafts
+            </span>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
