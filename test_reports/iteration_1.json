@@ -1,0 +1,49 @@
+{
+  "summary": "Frontend-only landing page testing for PrioMail AI completed. Validated all 16 requested scenarios across desktop (1920x1080) and mobile (390x844) viewports via Playwright. Page loads with zero console errors, all data-testids exist, all interactions function as expected. Only one minor UX gap found around invalid-email toast path.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Footer email subscribe - invalid path",
+        "issue": "Footer email input uses type=\"email\", which triggers native HTML5 validation BEFORE the React submit handler. As a result the custom 'Enter a valid email' Sonner error toast is unreachable for typed-but-invalid values like 'invalid' (browser blocks form submission with its own bubble). Success path (valid email) works and shows 'You're on the list!' toast correctly.",
+        "affected_selectors": ["[data-testid=\"footer-email-input\"]", "[data-testid=\"footer-cta-submit\"]"]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "OPTIONAL: To make the custom error toast reachable, either (a) change the footer-email-input type from 'email' to 'text' and rely on JS validation, or (b) add noValidate to the form element. Currently invalid path is masked by browser-native validation. Functionally not broken — just inconsistent with stated requirement that 'invalid shows error toast'."
+  ],
+  "critical_code_review_comments": [
+    "Pricing.jsx uses `plan.monthly > 0` after a `plan.monthly === null` short-circuit — safe, but consider extracting price formatting to a helper for clarity.",
+    "Footer.jsx: input type=email prevents the JS validation branch from ever firing for non-@ inputs (see integration issue above).",
+    "Landing.jsx is clean and composable. All sections are split into focused components < 200 lines each."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (no backend in scope)", "frontend": "100% (all 16 acceptance criteria pass; 1 minor UX nit)"},
+  "test_credentials": "N/A - no auth in scope",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Static marketing page. Use REACT_APP_BACKEND_URL from /app/frontend/.env. Key flows verified: header sticky+nav, smooth-scroll to #features/#how/#pricing/#faq, hero CTAs, logo cloud, interactive demo (emails flow into 5 buckets, observed bucket population), 7 feature cards, 3 how-it-works steps, pricing Monthly/Annual toggle (Pro 249<->2490, Team 499<->4990, '2 MONTHS FREE' badge), all 4 pricing CTAs clickable, 4 testimonial cards, FAQ accordion expands (data-state=open), footer success toast on valid email, social/footer links, mobile menu toggle. Console errors: 0.",
+  "verified_acceptance_criteria": {
+    "page_loads_no_console_errors": "PASS (0 errors)",
+    "header_sticky_logo_nav_signin_cta": "PASS",
+    "nav_smooth_scroll_to_sections": "PASS (features, how, pricing, faq all enter viewport)",
+    "hero_with_cta": "PASS (hero section has 16 interactive elements)",
+    "logo_cloud_renders": "PASS",
+    "interactive_demo_emails_flow_to_5_buckets": "PASS (verified items appear in CRITICAL/URGENT/NORMAL/SPAM/PHISHING buckets over time; demo auto-resets after run)",
+    "features_bento_7_cards": "PASS (7 feature- testids found)",
+    "how_it_works_3_steps": "PASS (3 step- testids found)",
+    "pricing_monthly_annual_toggle": "PASS (Pro 249->2490, Team 499->4990, 2 MONTHS FREE badge visible)",
+    "4_pricing_ctas_clickable": "PASS (free/pro/team/enterprise all visible & have hrefs)",
+    "testimonials_4_cards": "PASS (4 testimonial- testids found)",
+    "faq_accordion_expand": "PASS (data-state toggles to 'open' on click)",
+    "footer_email_form_valid_success": "PASS (success toast shown)",
+    "footer_email_form_invalid_error": "PARTIAL (browser native validation blocks; custom toast unreachable)",
+    "footer_social_links_and_columns": "PASS",
+    "mobile_responsive_header_toggle": "PASS (toggle reveals mobile-nav-* and mobile-cta; smooth-scroll works from mobile nav)"
+  }
+}
