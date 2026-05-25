@@ -65,8 +65,13 @@ export default function Footer() {
       <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
-            <a href="#" className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-[#1a1424] border border-primary/30 flex items-center justify-center">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="flex items-center gap-2.5 mb-4 cursor-pointer group"
+              data-testid="footer-logo"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[#1a1424] border border-primary/30 flex items-center justify-center group-hover:border-primary/60 transition-colors">
                 <Zap className="w-4 h-4 text-primary" strokeWidth={2.5} />
               </div>
               <span className="font-display text-xl tracking-tight">PrioMail AI</span>

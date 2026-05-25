@@ -11,7 +11,7 @@ const STEPS = [
   {
     n: "02",
     icon: BrainCircuit,
-    title: "Claude classifies in real time",
+    title: "AI classifies in real time",
     desc: "Every incoming message is scored across 5 priority tiers in under 400ms.",
   },
   {

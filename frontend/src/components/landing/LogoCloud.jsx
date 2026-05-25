@@ -1,5 +1,5 @@
 const LOGOS = [
-  "GMAIL", "OUTLOOK", "CLAUDE", "STRIPE", "SUPABASE", "ONESIGNAL", "VERCEL", "RAILWAY",
+  "GMAIL", "OUTLOOK", "STRIPE", "SUPABASE", "ONESIGNAL", "VERCEL", "RAILWAY", "GITHUB",
 ];
 
 export default function LogoCloud() {

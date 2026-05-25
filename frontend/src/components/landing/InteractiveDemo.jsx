@@ -47,8 +47,8 @@ export default function InteractiveDemo() {
   const current = SAMPLE_EMAILS[index];
 
   return (
-    <section id="demo" className="relative py-24 md:py-32 grain" data-testid="interactive-demo">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="demo" className="relative py-24 md:py-32" data-testid="interactive-demo">
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,20 +60,20 @@ export default function InteractiveDemo() {
             <Sparkles className="w-3.5 h-3.5" /> Live demo
           </div>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tighter leading-[0.95]">
-            Watch Claude sort<br />real emails<span className="text-primary">.</span> Live.
+            Watch our AI sort<br />real emails<span className="text-primary">.</span> Live.
           </h2>
           <p className="mt-5 text-muted-foreground max-w-xl">
             Every message flows through our priority pipeline in under 400ms. No more inbox dread — just five clean buckets.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-6">
+        <div className="grid lg:grid-cols-12 gap-4">
           {/* Incoming stream */}
-          <div className="lg:col-span-4 backdrop-blur-xl bg-card border border-border rounded-2xl p-6 h-[480px] flex flex-col" data-testid="demo-incoming">
+          <div className="lg:col-span-4 bg-card border border-border rounded-2xl p-5 lg:h-[400px] flex flex-col" data-testid="demo-incoming">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-bold">Incoming</div>
-                <div className="font-display text-2xl">Inbox stream</div>
+                <div className="font-display text-xl">Inbox stream</div>
               </div>
               <div className="text-[10px] font-mono-d text-emerald-400 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -89,13 +89,13 @@ export default function InteractiveDemo() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -40, scale: 0.9, transition: { duration: 0.3 } }}
                     transition={{ duration: 0.4 }}
-                    className="w-full backdrop-blur-md bg-black/60 border border-white/10 rounded-xl p-4"
+                    className="w-full bg-[#0f0c18] border border-white/10 rounded-xl p-4"
                   >
                     <div className="text-[10px] text-muted-foreground font-mono-d truncate mb-1">{current.sender}</div>
                     <div className="text-sm font-bold truncate">{current.subject}</div>
                     <div className="mt-3 flex items-center gap-2 text-[10px] text-primary font-bold">
                       <Sparkles className="w-3 h-3 animate-pulse" />
-                      Claude analyzing...
+                      AI analyzing...
                     </div>
                   </motion.div>
                 ) : (
@@ -112,25 +112,25 @@ export default function InteractiveDemo() {
           </div>
 
           {/* Buckets */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-5 gap-3">
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-5 gap-2.5">
             {BUCKETS.map((b) => (
               <div
                 key={b.id}
-                className="backdrop-blur-xl bg-card border border-border rounded-2xl p-4 min-h-[480px] flex flex-col"
+                className="bg-card border border-border rounded-xl p-3 lg:h-[400px] flex flex-col"
                 data-testid={`demo-bucket-${b.id}`}
               >
                 <div
-                  className="flex items-center gap-1.5 text-[10px] font-black tracking-[0.15em] px-2 py-1.5 rounded-full mb-3 self-start"
+                  className="flex items-center gap-1 text-[9px] font-black tracking-[0.12em] px-2 py-1 rounded-full mb-3 self-start"
                   style={{
                     background: `${b.color}1A`,
                     color: b.color,
                     border: `1px solid ${b.color}40`,
                   }}
                 >
-                  <b.icon className="w-3 h-3" />
+                  <b.icon className="w-2.5 h-2.5" />
                   {b.label}
                 </div>
-                <div className="flex-1 flex flex-col gap-2">
+                <div className="flex-1 flex flex-col gap-1.5 overflow-hidden">
                   <AnimatePresence>
                     {(sorted[b.id] || []).map((email, i) => (
                       <motion.div
@@ -138,15 +138,15 @@ export default function InteractiveDemo() {
                         initial={{ opacity: 0, y: -10, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="bg-black/40 border border-white/5 rounded-lg p-2.5"
+                        className="bg-[#0f0c18] border border-white/5 rounded-md p-2"
                       >
                         <div className="text-[9px] text-muted-foreground truncate font-mono-d">{email.sender}</div>
-                        <div className="text-[11px] font-semibold truncate leading-tight">{email.subject}</div>
+                        <div className="text-[10px] font-semibold truncate leading-tight">{email.subject}</div>
                       </motion.div>
                     ))}
                   </AnimatePresence>
                 </div>
-                <div className="text-[10px] font-mono-d text-muted-foreground mt-2">
+                <div className="text-[9px] font-mono-d text-muted-foreground mt-2">
                   {(sorted[b.id] || []).length} mails
                 </div>
               </div>

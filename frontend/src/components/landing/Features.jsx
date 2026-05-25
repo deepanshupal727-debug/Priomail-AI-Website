@@ -90,7 +90,7 @@ export default function Features() {
             >
               {/* Glow on hover */}
               <div
-                className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-0 group-hover:opacity-30 blur-3xl transition-opacity duration-500"
+                className="absolute -top-12 -right-12 w-28 h-28 rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500 pointer-events-none"
                 style={{ background: f.accent }}
               />
 

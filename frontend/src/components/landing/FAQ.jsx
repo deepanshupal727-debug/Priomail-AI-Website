@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const FAQS = [
   {
     q: "How does PrioMail AI classify my emails?",
-    a: "Every incoming message is sent (encrypted, in-transit) to Claude Haiku 4.5 with a tuned priority schema. We assign one of five labels — CRITICAL, URGENT, NORMAL, SPAM, PHISHING — based on sender, content, your past responses, and contextual signals. Average classification time is under 400ms.",
+    a: "Every incoming message is sent (encrypted, in-transit) to our priority AI engine with a tuned classification schema. We assign one of five labels — CRITICAL, URGENT, NORMAL, SPAM, PHISHING — based on sender, content, your past responses, and contextual signals. Average classification time is under 400ms.",
   },
   {
     q: "Is my email data safe?",
