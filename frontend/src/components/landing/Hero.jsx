@@ -108,7 +108,7 @@ export default function Hero() {
           >
             <a
               href="#pricing"
-              className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-7 py-4 font-bold transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_36px_-8px_rgba(255,59,48,0.7)]"
+              className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-7 py-4 font-bold transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_36px_-8px_rgba(167,139,250,0.8)]"
               data-testid="hero-cta-primary"
             >
               Start free — 14 days

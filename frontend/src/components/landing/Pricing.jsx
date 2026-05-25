@@ -163,13 +163,13 @@ export default function Pricing() {
                   )}
                 </div>
 
-                <a
-                  href="https://priomailai.in/register"
-                  className={`flex items-center justify-center gap-2 w-full rounded-full px-5 py-3 font-bold text-sm transition-all hover:-translate-y-0.5 ${
-                    plan.highlight
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "bg-secondary border border-border text-foreground hover:bg-accent"
-                  }`}
+              <a
+                href="https://priomailai.in/register"
+                className={`flex items-center justify-center gap-2 w-full rounded-full px-5 py-3 font-bold text-sm transition-all hover:-translate-y-0.5 ${
+                  plan.highlight
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_8px_24px_-8px_rgba(167,139,250,0.7)]"
+                    : "bg-secondary border border-border text-foreground hover:bg-accent"
+                }`}
                   data-testid={`pricing-${plan.id}-cta`}
                 >
                   {plan.cta}

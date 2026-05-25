@@ -30,11 +30,11 @@ export default function Header() {
       data-testid="header"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 md:h-20 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group" data-testid="header-logo">
-          <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_24px_-4px_rgba(255,59,48,0.7)] group-hover:rotate-12 transition-transform">
-            <Zap className="w-5 h-5 text-white" fill="currentColor" />
+        <a href="#" className="flex items-center gap-2.5 group" data-testid="header-logo">
+          <div className="w-9 h-9 rounded-xl bg-[#1a1424] border border-primary/30 flex items-center justify-center group-hover:border-primary/60 transition-colors">
+            <Zap className="w-4 h-4 text-primary" strokeWidth={2.5} />
           </div>
-          <span className="font-display text-xl tracking-tight">PrioMail<span className="text-primary">.</span>AI</span>
+          <span className="font-display text-xl tracking-tight">PrioMail AI</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-10">
@@ -61,7 +61,7 @@ export default function Header() {
           </a>
           <a
             href="#pricing"
-            className="text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_rgba(255,59,48,0.7)]"
+            className="text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_rgba(167,139,250,0.8)]"
             data-testid="header-cta"
           >
             Start free

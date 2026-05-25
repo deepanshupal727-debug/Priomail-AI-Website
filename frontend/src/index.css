@@ -8,7 +8,7 @@
 
 html, body {
   margin: 0;
-  background: #050505;
+  background: #08060f;
   color: #ffffff;
   font-family: 'Manrope', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -16,31 +16,31 @@ html, body {
 }
 
 ::selection {
-  background: #FF3B30;
-  color: #ffffff;
+  background: #A78BFA;
+  color: #0a0a0a;
 }
 
 @layer base {
   :root {
-    --background: 0 0% 2%;
+    --background: 240 10% 3.5%;
     --foreground: 0 0% 100%;
-    --card: 0 0% 6.7%;
-    --card-foreground: 0 0% 90%;
-    --popover: 0 0% 6.7%;
+    --card: 240 8% 7%;
+    --card-foreground: 0 0% 92%;
+    --popover: 240 8% 7%;
     --popover-foreground: 0 0% 100%;
-    --primary: 4 100% 59%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 10.2%;
-    --secondary-foreground: 0 0% 64%;
-    --muted: 0 0% 10.2%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 15%;
+    --primary: 258 90% 73%;
+    --primary-foreground: 240 10% 5%;
+    --secondary: 240 6% 11%;
+    --secondary-foreground: 240 5% 65%;
+    --muted: 240 6% 11%;
+    --muted-foreground: 240 5% 50%;
+    --accent: 258 50% 18%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 70% 35%;
+    --destructive: 0 70% 45%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 4 100% 59%;
+    --border: 240 6% 15%;
+    --input: 240 6% 15%;
+    --ring: 258 90% 73%;
     --radius: 1rem;
   }
 }
@@ -73,9 +73,9 @@ html, body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #050505; }
-::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #FF3B30; }
+::-webkit-scrollbar-track { background: #08060f; }
+::-webkit-scrollbar-thumb { background: #2a2438; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #A78BFA; }
 
 /* Marquee animation */
 @keyframes marquee {
@@ -86,18 +86,18 @@ html, body {
 
 /* Glow effects */
 .glow-red {
-  box-shadow: 0 0 80px -20px rgba(255, 59, 48, 0.6), 0 0 30px -10px rgba(255, 59, 48, 0.4);
+  box-shadow: 0 0 80px -20px rgba(167, 139, 250, 0.6), 0 0 30px -10px rgba(167, 139, 250, 0.4);
 }
 
 .text-glow-red {
-  text-shadow: 0 0 30px rgba(255, 59, 48, 0.5);
+  text-shadow: 0 0 30px rgba(167, 139, 250, 0.55);
 }
 
 /* Tracing beam border for Pro card */
 .tracing-beam {
   position: relative;
-  background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
-              conic-gradient(from var(--angle, 0deg), #FF3B30 0deg, transparent 120deg, transparent 240deg, #F59E0B 360deg) border-box;
+  background: linear-gradient(#0f0c18, #0f0c18) padding-box,
+              conic-gradient(from var(--angle, 0deg), #A78BFA 0deg, transparent 120deg, transparent 240deg, #C4B5FD 360deg) border-box;
   border: 2px solid transparent;
   animation: rotate-beam 5s linear infinite;
 }
@@ -114,16 +114,16 @@ html, body {
 
 /* Pulse glow */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); }
-  50% { box-shadow: 0 0 0 16px rgba(255, 59, 48, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.7); }
+  50% { box-shadow: 0 0 0 16px rgba(167, 139, 250, 0); }
 }
 .pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
 
 /* Radial gradient bg */
 .radial-bg {
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 59, 48, 0.15), transparent 60%),
-              radial-gradient(ellipse 60% 50% at 80% 80%, rgba(245, 158, 11, 0.08), transparent 60%),
-              #050505;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167, 139, 250, 0.18), transparent 60%),
+              radial-gradient(ellipse 60% 50% at 80% 80%, rgba(124, 58, 237, 0.10), transparent 60%),
+              #08060f;
 }
 
 /* Grid line bg */
