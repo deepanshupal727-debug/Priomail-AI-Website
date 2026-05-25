@@ -36,6 +36,7 @@ export default function Footer() {
             </p>
 
             <form
+              noValidate
               onSubmit={handleSubmit}
               className="mt-10 max-w-md mx-auto flex items-center gap-2 p-2 bg-card border border-border rounded-full focus-within:border-primary transition-colors"
               data-testid="footer-cta-form"
