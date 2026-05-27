@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, Ticket, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, Users, Ticket, ArrowLeft, Zap } from "lucide-react";
 
 const navItems = [
   { to: "/admin", label: "Overview", icon: LayoutDashboard, end: true },
@@ -19,11 +19,9 @@ export default function AdminLayout({ children, title, subtitle, actions }) {
             className="flex items-center gap-2.5 group"
             data-testid="admin-logo-link"
           >
-            <img
-              src="/priomail-icon-white-chip.svg"
-              alt="PrioMail AI"
-              className="w-9 h-9 group-hover:scale-105 transition-transform"
-            />
+            <div className="w-9 h-9 rounded-xl bg-[#1a1424] border border-primary/30 flex items-center justify-center group-hover:border-primary/60 transition-colors" data-testid="admin-logo-mark">
+              <Zap className="w-4 h-4 text-primary" strokeWidth={2.5} />
+            </div>
             <div className="flex flex-col items-start">
               <span className="font-display text-base tracking-tight leading-none">PrioMail AI</span>
               <span className="text-[10px] uppercase tracking-widest text-primary mt-0.5">Admin</span>
@@ -69,8 +67,10 @@ export default function AdminLayout({ children, title, subtitle, actions }) {
 
       {/* Mobile top bar */}
       <div className="md:hidden sticky top-0 z-40 bg-[#0c0814] border-b border-border px-4 py-3 flex items-center justify-between">
-        <button onClick={() => navigate("/")} className="flex items-center gap-2">
-          <img src="/priomail-icon-white-chip.svg" alt="PrioMail" className="w-7 h-7" />
+        <button onClick={() => navigate("/")} className="flex items-center gap-2" data-testid="admin-mobile-logo">
+          <div className="w-8 h-8 rounded-lg bg-[#1a1424] border border-primary/30 flex items-center justify-center">
+            <Zap className="w-3.5 h-3.5 text-primary" strokeWidth={2.5} />
+          </div>
           <span className="font-display text-sm">PrioMail AI</span>
         </button>
         <span className="text-[10px] uppercase tracking-widest text-primary">Admin</span>

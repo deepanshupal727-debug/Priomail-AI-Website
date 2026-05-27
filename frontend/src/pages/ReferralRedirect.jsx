@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Zap } from "lucide-react";
 import { referralsApi } from "@/lib/api";
 
 export default function ReferralRedirect() {
@@ -26,7 +27,9 @@ export default function ReferralRedirect() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center px-6">
-      <img src="/priomail-icon-white-chip.svg" alt="PrioMail AI" className="w-20 h-20 mb-6 animate-pulse" />
+      <div className="w-20 h-20 rounded-2xl bg-[#1a1424] border border-primary/30 flex items-center justify-center mb-6 animate-pulse" data-testid="referral-redirect-logo">
+        <Zap className="w-9 h-9 text-primary" strokeWidth={2.5} />
+      </div>
       <h1 className="font-display text-2xl tracking-tight">
         {status === "invalid" ? "Invalid referral link" : "Hold tight…"}
       </h1>
