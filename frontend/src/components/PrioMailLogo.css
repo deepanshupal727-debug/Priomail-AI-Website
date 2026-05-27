@@ -193,22 +193,41 @@
     }
 }
 
-.pm-bolt-path {
-    transition:
-        opacity 300ms ease,
-        transform 300ms ease;
+.pm-bolt-base {
+    /* base outline of the zigzag M - always visible */
 }
 
-/* charged colour overlay - hidden until click */
+/* Continuously pulsing layer = "live" filling effect */
+.pm-bolt-pulse {
+    opacity: 0;
+    animation: pm-bolt-pulse 2.4s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes pm-bolt-pulse {
+    0%,
+    100% {
+        opacity: 0;
+        stroke-width: 9;
+    }
+    50% {
+        opacity: 1;
+        stroke-width: 12;
+    }
+}
+
+/* white-bright charge layer revealed on click */
 .pm-bolt-fill {
     opacity: 0;
-    transform-origin: center;
     transition: opacity 380ms ease;
+    mix-blend-mode: screen;
 }
 
-.pm-bolt-highlight {
-    pointer-events: none;
-    mix-blend-mode: screen;
+/* trace-line that "draws" along the M shape on click */
+.pm-bolt-trace {
+    stroke-dasharray: 360;
+    stroke-dashoffset: 360;
+    opacity: 0;
 }
 
 /* shimmer sweep across the bolt */
@@ -223,8 +242,7 @@
     animation: pm-bolt-fill-rise 900ms cubic-bezier(0.2, 0.8, 0.25, 1) both;
 }
 
-.pm-card.is-charging .pm-bolt-path {
-    stroke-width: 6;
+.pm-card.is-charging .pm-bolt-base {
     animation: pm-bolt-stroke-flash 900ms ease-out;
 }
 
@@ -232,12 +250,27 @@
     animation: pm-bolt-glow-burst 1.2s ease-out;
 }
 
-.pm-card.is-charging .pm-bolt-shimmer {
-    animation: pm-shimmer-sweep 900ms ease-out 120ms;
+.pm-card.is-charging .pm-bolt-trace {
+    opacity: 1;
+    animation: pm-bolt-trace-draw 900ms ease-out;
 }
 
 .pm-card.is-charging .pm-ambient {
     animation: pm-ambient-burst 1.2s ease-out;
+}
+
+@keyframes pm-bolt-trace-draw {
+    0% {
+        opacity: 0;
+        stroke-dashoffset: 360;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        stroke-dashoffset: 0;
+    }
 }
 
 @keyframes pm-bolt-fill-rise {
