@@ -108,14 +108,24 @@
     }
 }
 
-/* ----- Wordmark ----- */
+/* ----- Wordmark (bold, glowing — matches reference image) ----- */
 .pm-wordmark {
-    font-family: "Inter", "Helvetica Neue", sans-serif;
-    font-weight: 200;
-    letter-spacing: 0.005em;
-    font-size: calc(var(--logo-size) * 0.24);
-    color: #ffffff;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: calc(var(--logo-size) * 0.3);
     line-height: 1;
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f3eaff 55%,
+        #c4a8ff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(181, 148, 255, 0.45))
+        drop-shadow(0 2px 18px rgba(124, 92, 255, 0.25));
 }
 
 @media (prefers-reduced-motion: reduce) {
