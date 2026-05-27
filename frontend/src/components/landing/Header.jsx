@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const links = [
   { label: "Features", href: "#features" },
@@ -37,8 +37,15 @@ export default function Header() {
           data-testid="header-logo"
           aria-label="PrioMail AI - scroll to top"
         >
-          <div className="w-9 h-9 rounded-xl bg-[#1a1424] border border-primary/30 flex items-center justify-center group-hover:border-primary/60 transition-colors">
-            <Zap className="w-4 h-4 text-primary" strokeWidth={2.5} />
+          <div className="relative w-10 h-10 rounded-xl bg-[#1a1424] border border-primary/30 flex items-center justify-center group-hover:border-primary/60 transition-colors overflow-hidden">
+            <img
+              src="/priomail-icon-white.svg"
+              alt=""
+              aria-hidden="true"
+              className="w-7 h-7 transition-transform duration-500 group-hover:scale-110"
+              data-testid="header-logo-mark"
+            />
+            <span className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_20px_-6px_rgba(167,139,250,0.5)]" />
           </div>
           <span className="font-display text-xl tracking-tight">PrioMail AI</span>
         </a>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles, ArrowRight } from "lucide-react";
+import { Check, Sparkles, ArrowRight, Tag, Loader2, X } from "lucide-react";
+import { couponsApi } from "@/lib/api";
+import { toast } from "sonner";
 
 const PLANS = [
   {
@@ -71,6 +73,46 @@ const PLANS = [
 
 export default function Pricing() {
   const [annual, setAnnual] = useState(false);
+  const [couponInput, setCouponInput] = useState("");
+  const [coupon, setCoupon] = useState(null); // { code, discount_type, discount_value, description }
+  const [validating, setValidating] = useState(false);
+
+  const applyCoupon = async (e) => {
+    e?.preventDefault?.();
+    const code = couponInput.trim().toUpperCase();
+    if (!code) {
+      toast.error("Enter a coupon code");
+      return;
+    }
+    setValidating(true);
+    try {
+      const res = await couponsApi.validate(code);
+      if (res.valid) {
+        setCoupon(res);
+        toast.success(`Coupon applied: ${res.code}`);
+      } else {
+        setCoupon(null);
+        toast.error(res.reason || "Invalid coupon");
+      }
+    } catch {
+      toast.error("Could not validate coupon. Try again.");
+    } finally {
+      setValidating(false);
+    }
+  };
+
+  const clearCoupon = () => {
+    setCoupon(null);
+    setCouponInput("");
+  };
+
+  const applyDiscount = (price) => {
+    if (price == null || price === 0 || !coupon) return price;
+    if (coupon.discount_type === "percent") {
+      return Math.max(0, Math.round(price - (price * coupon.discount_value) / 100));
+    }
+    return Math.max(0, Math.round(price - coupon.discount_value));
+  };
 
   return (
     <section id="pricing" className="relative py-24 md:py-32" data-testid="pricing">
@@ -113,11 +155,65 @@ export default function Pricing() {
               </span>
             </button>
           </div>
+
+          {/* Coupon code */}
+          <div className="mt-6 flex justify-center" data-testid="coupon-block">
+            {coupon ? (
+              <div
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 text-xs font-bold"
+                data-testid="coupon-applied"
+              >
+                <Tag className="w-3.5 h-3.5" />
+                <span className="font-mono tracking-wider">{coupon.code}</span>
+                <span className="text-emerald-200/80 font-medium">
+                  {coupon.discount_type === "percent" ? `${coupon.discount_value}% off` : `₹${coupon.discount_value} off`}
+                </span>
+                <button
+                  type="button"
+                  onClick={clearCoupon}
+                  className="ml-1 p-1 rounded-full hover:bg-emerald-500/20 transition-colors"
+                  data-testid="coupon-clear"
+                  aria-label="Remove coupon"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={applyCoupon}
+                className="flex items-center gap-2 bg-card border border-border rounded-full p-1 pl-4"
+                data-testid="coupon-form"
+              >
+                <Tag className="w-3.5 h-3.5 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={couponInput}
+                  onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
+                  placeholder="Have a coupon? Enter code"
+                  className="bg-transparent text-xs font-mono tracking-wider focus:outline-none placeholder:text-muted-foreground/70 w-44 sm:w-56 uppercase"
+                  data-testid="coupon-input"
+                  maxLength={32}
+                />
+                <button
+                  type="submit"
+                  disabled={validating || !couponInput.trim()}
+                  className="text-[11px] font-bold bg-primary text-primary-foreground rounded-full px-4 py-2 hover:bg-primary/90 transition-all disabled:opacity-50 inline-flex items-center gap-1.5"
+                  data-testid="coupon-apply"
+                >
+                  {validating ? <Loader2 className="w-3 h-3 animate-spin" /> : null}
+                  Apply
+                </button>
+              </form>
+            )}
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {PLANS.map((plan, i) => {
-            const price = plan.monthly === null ? null : annual ? plan.annual : plan.monthly;
+            const basePrice = plan.monthly === null ? null : annual ? plan.annual : plan.monthly;
+            const price = basePrice;
+            const discounted = applyDiscount(price);
+            const hasDiscount = coupon && price != null && price > 0 && discounted < price;
             const period = plan.monthly === null ? "" : annual ? "/yr" : "/mo";
 
             return (
@@ -151,12 +247,27 @@ export default function Pricing() {
                   ) : price === 0 ? (
                     <div className="font-display text-5xl tracking-tighter">₹0</div>
                   ) : (
-                    <div className="flex items-baseline gap-1">
-                      <span className="font-display text-5xl tracking-tighter">₹{price.toLocaleString()}</span>
-                      <span className="text-sm text-muted-foreground">{period}</span>
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className="font-display text-5xl tracking-tighter" data-testid={`pricing-${plan.id}-price`}>
+                          ₹{(hasDiscount ? discounted : price).toLocaleString()}
+                        </span>
+                        <span className="text-sm text-muted-foreground">{period}</span>
+                        {hasDiscount && (
+                          <span className="text-sm text-muted-foreground/70 line-through" data-testid={`pricing-${plan.id}-original`}>
+                            ₹{price.toLocaleString()}
+                          </span>
+                        )}
+                      </div>
+                      {hasDiscount && (
+                        <div className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase text-emerald-400" data-testid={`pricing-${plan.id}-discount-badge`}>
+                          <Tag className="w-3 h-3" />
+                          {coupon.code} applied
+                        </div>
+                      )}
                     </div>
                   )}
-                  {annual && plan.monthly > 0 && (
+                  {annual && plan.monthly > 0 && !hasDiscount && (
                     <div className="text-[10px] font-mono-d text-emerald-400 mt-1">
                       ≈ ₹{Math.round(plan.annual / 12).toLocaleString()}/mo billed yearly
                     </div>
@@ -164,7 +275,7 @@ export default function Pricing() {
                 </div>
 
               <a
-                href="https://priomailai.in/register"
+                href={coupon ? `https://priomailai.in/register?coupon=${encodeURIComponent(coupon.code)}` : "https://priomailai.in/register"}
                 className={`flex items-center justify-center gap-2 w-full rounded-full px-5 py-3 font-bold text-sm transition-all hover:-translate-y-0.5 ${
                   plan.highlight
                     ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_8px_24px_-8px_rgba(167,139,250,0.7)]"

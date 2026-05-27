@@ -1,0 +1,43 @@
+{
+  "summary": "Full backend + frontend testing of PrioMail referral and coupon systems, plus the new logo & coupon input on Pricing. 23/23 pytest backend tests pass; all UI flows (header logo, pricing coupon apply/clear/discount, admin overview stats, admin referrals create/copy/toggle/delete, admin coupons create/copy/toggle/delete, /r/{code} redirect with click event + localStorage) verified end-to-end. No issues found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_referrals_coupons.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py: stats query for events does a per-referral query inside the list loop (N+1). Acceptable for current scale but worth refactoring with aggregation if list grows >100s.",
+    "Admin routes are intentionally unauthenticated for now — must be gated behind auth before production.",
+    "Pricing.jsx: applyDiscount rounds with Math.round and floors at 0 — correct. CTA URL correctly carries coupon param to register flow.",
+    "ReferralRedirect.jsx: gracefully handles invalid codes by routing to '/' after 1.5s.",
+    "All required data-testids (header-logo-mark, coupon-form/input/apply/applied/clear, pricing-pro-price/original, new-referral-btn, referral-create-form, submit-create-referral, referral-row-{CODE}, copy-link-{CODE}, toggle-{CODE}, delete-{CODE}, new-coupon-btn, coupon-create-form, submit-create-coupon, coupon-row-{CODE}, copy-coupon-{CODE}, toggle-coupon-{CODE}, delete-coupon-{CODE}) are present and functional."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_referrals_coupons.py (new)"
+  ],
+  "success_rate": {"backend": "100% (23/23 pytest tests passing)", "frontend": "100% (all required flows pass)"},
+  "test_credentials": "N/A - admin routes intentionally open",
+  "seed_data_creation": "Tests create their own TEST_/UI* prefixed data and clean up via API at end of run.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests live at /app/backend/tests/test_referrals_coupons.py — covers status, all referral CRUD + events + stats (percent & fixed reward math), all coupon CRUD + validate (valid/not-found/inactive/expired/max-uses) + redeem + redemptions + admin/stats. UI verified with Playwright: header logo image src=/priomail-icon-white.svg renders; Pricing coupon form applies a real coupon (UITEST20 percent=20 -> ₹249 became ₹199 with strikethrough), CTA URL gets ?coupon= param, clear restores price; admin overview shows 8 stat cards (stat-card-total-codes, stat-card-clicks, stat-card-sign-ups, stat-card-conversions, stat-card-total-coupons, stat-card-redemptions, stat-card-total-revenue, stat-card-conversion-rate); admin referrals form uses testids input-owner-name/input-owner-email/input-custom-code/select-reward-type/input-reward-value/input-notes (NOT name attributes); admin coupons form uses input-coupon-code/input-coupon-description/select-discount-type/input-discount-value/input-max-uses/input-valid-until; /r/UIREDIR1 successfully fired 2 click events on backend and set localStorage.priomail_ref=UIREDIR1 and redirected to /?ref=UIREDIR1. Toast confirmation 'Referral deleted' appears after delete.",
+  "verified_acceptance_criteria": {
+    "header_logo_image": "PASS — img with src=/priomail-icon-white.svg and data-testid=header-logo-mark",
+    "pricing_coupon_form_visible": "PASS",
+    "coupon_invalid_shows_toast_no_discount": "PASS — toast 'Coupon not found', no coupon-applied element",
+    "coupon_valid_applies_discount_with_strikethrough": "PASS — UITEST20 (20% off) → Pro ₹199 with ₹249 strikethrough; coupon-applied element shown",
+    "coupon_cta_url_carries_param": "PASS — pro CTA href = https://priomailai.in/register?coupon=UITEST20",
+    "coupon_clear_resets_prices": "PASS — Pro returns to ₹249, no strikethrough",
+    "admin_overview_stats": "PASS — 8 stat cards populated from /api/admin/stats",
+    "admin_referrals_create_list_copy_toggle_delete": "PASS — all 5 actions verified, success toast 'Referral deleted' shown",
+    "admin_coupons_create_list_copy_toggle_delete": "PASS — all 5 actions verified",
+    "referral_redirect_fires_click_stores_ls_redirects": "PASS — 2 click events recorded on backend, localStorage.priomail_ref=UIREDIR1, redirected to /?ref=UIREDIR1",
+    "no_regression_on_root_and_status_endpoints": "PASS"
+  }
+}
