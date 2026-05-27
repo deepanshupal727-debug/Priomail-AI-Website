@@ -1,0 +1,154 @@
+/* ---------- PrioMail AI logo showcase page ---------- */
+
+.App {
+    min-height: 100vh;
+    background: #07050f;
+    color: #f3eefb;
+}
+
+.logo-showcase {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: clamp(28px, 5vw, 64px) clamp(20px, 6vw, 88px);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* deep radial backdrop */
+.logo-showcase-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            ellipse 60% 50% at 50% 30%,
+            rgba(124, 92, 255, 0.18) 0%,
+            rgba(124, 92, 255, 0) 60%
+        ),
+        radial-gradient(
+            ellipse 80% 60% at 50% 100%,
+            rgba(60, 30, 120, 0.35) 0%,
+            rgba(7, 5, 15, 0) 70%
+        ),
+        #07050f;
+    z-index: -2;
+}
+
+/* subtle grid overlay */
+.logo-showcase-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(139, 92, 255, 0.06) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(139, 92, 255, 0.06) 1px,
+            transparent 1px
+        );
+    background-size: 56px 56px;
+    mask-image: radial-gradient(
+        ellipse at 50% 40%,
+        black 30%,
+        transparent 75%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ---- header ---- */
+.logo-showcase-header {
+    max-width: 620px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.logo-showcase-eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #a585ff;
+    padding: 6px 12px;
+    border: 1px solid rgba(139, 92, 255, 0.35);
+    border-radius: 999px;
+    width: fit-content;
+    background: rgba(139, 92, 255, 0.06);
+    backdrop-filter: blur(6px);
+}
+
+.logo-showcase-title {
+    font-family: "Inter", "Helvetica Neue", sans-serif;
+    font-weight: 200;
+    font-size: clamp(28px, 4.2vw, 52px);
+    line-height: 1.05;
+    margin: 0;
+    background: linear-gradient(180deg, #ffffff 20%, #b594ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.01em;
+}
+
+.logo-showcase-sub {
+    color: rgba(243, 238, 251, 0.6);
+    font-size: clamp(14px, 1.4vw, 17px);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 460px;
+}
+
+/* ---- stage (logo center) ---- */
+.logo-showcase-stage {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: clamp(48px, 8vw, 96px) 0;
+}
+
+/* ---- footer features ---- */
+.logo-showcase-footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    padding-top: clamp(28px, 4vw, 56px);
+    border-top: 1px solid rgba(139, 92, 255, 0.12);
+}
+
+.logo-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.logo-feature-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #c4a8ff 0%, #7c5cff 70%);
+    box-shadow: 0 0 14px rgba(139, 92, 255, 0.7);
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.logo-feature-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #f3eefb;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+}
+
+.logo-feature-desc {
+    color: rgba(243, 238, 251, 0.55);
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0;
+}
