@@ -1,6 +1,7 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "@/pages/Landing";
+import ReferAFriend from "@/pages/ReferAFriend";
 import AdminOverview from "@/pages/admin/AdminOverview";
 import AdminReferrals from "@/pages/admin/AdminReferrals";
 import AdminCoupons from "@/pages/admin/AdminCoupons";
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/refer" element={<ReferAFriend />} />
           <Route path="/r/:code" element={<ReferralRedirect />} />
           <Route path="/admin" element={<AdminOverview />} />
           <Route path="/admin/referrals" element={<AdminReferrals />} />

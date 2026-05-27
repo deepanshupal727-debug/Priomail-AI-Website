@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Zap, Gift } from "lucide-react";
 
 const links = [
-  { label: "Features", href: "#features" },
-  { label: "How it Works", href: "#how" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Features", href: "/#features" },
+  { label: "How it Works", href: "/#how" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export default function Header() {
