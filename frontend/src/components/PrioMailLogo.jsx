@@ -115,14 +115,20 @@ export const PrioMailLogo = ({ size = 260, showWordmark = true }) => {
             >
               <defs>
                 <linearGradient id="boltStroke" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#c4a8ff" />
-                  <stop offset="50%" stopColor="#a585ff" />
+                  <stop offset="0%" stopColor="#b594ff" />
+                  <stop offset="50%" stopColor="#9a73ff" />
                   <stop offset="100%" stopColor="#7c5cff" />
                 </linearGradient>
+                {/* Fill uses the SAME violet palette, just brighter/saturated */}
                 <linearGradient id="boltFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#ffffff" />
-                  <stop offset="35%" stopColor="#d9c4ff" />
-                  <stop offset="100%" stopColor="#7c5cff" />
+                  <stop offset="0%" stopColor="#b594ff" />
+                  <stop offset="50%" stopColor="#8b5cff" />
+                  <stop offset="100%" stopColor="#6a3eff" />
+                </linearGradient>
+                <linearGradient id="boltShimmer" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#b594ff" stopOpacity="0" />
+                  <stop offset="50%" stopColor="#e9defc" stopOpacity="0.75" />
+                  <stop offset="100%" stopColor="#b594ff" stopOpacity="0" />
                 </linearGradient>
                 <filter id="boltGlow" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="3" result="blur" />
@@ -131,12 +137,15 @@ export const PrioMailLogo = ({ size = 260, showWordmark = true }) => {
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
+                <clipPath id="boltClip">
+                  <path d="M62 8 L20 84 L44 84 L36 152 L80 76 L56 76 L62 8 Z" />
+                </clipPath>
               </defs>
 
-              {/* Bolt path - matches the user's original shape */}
+              {/* Bolt outline path - more angular "M-ish" zigzag */}
               <path
                 className="pm-bolt-path"
-                d="M58 8 L24 86 L46 86 L40 152 L78 70 L54 70 L58 8 Z"
+                d="M62 8 L20 84 L44 84 L36 152 L80 76 L56 76 L62 8 Z"
                 stroke="url(#boltStroke)"
                 strokeWidth="5"
                 strokeLinejoin="round"
@@ -144,20 +153,17 @@ export const PrioMailLogo = ({ size = 260, showWordmark = true }) => {
                 filter="url(#boltGlow)"
               />
 
-              {/* Fill layer revealed on click */}
+              {/* Fill layer revealed on click - same violet, just intensified */}
               <path
                 className="pm-bolt-fill"
-                d="M58 8 L24 86 L46 86 L40 152 L78 70 L54 70 L58 8 Z"
+                d="M62 8 L20 84 L44 84 L36 152 L80 76 L56 76 L62 8 Z"
                 fill="url(#boltFill)"
               />
 
-              {/* Shimmer sweep clipped to the bolt */}
+              {/* Shimmer sweep clipped to the bolt - violet shimmer, not white */}
               <g className="pm-bolt-shimmer" clipPath="url(#boltClip)">
-                <rect x="-40" y="0" width="30" height="160" fill="white" opacity="0.85" />
+                <rect x="-50" y="0" width="40" height="160" fill="url(#boltShimmer)" />
               </g>
-              <clipPath id="boltClip">
-                <path d="M58 8 L24 86 L46 86 L40 152 L78 70 L54 70 L58 8 Z" />
-              </clipPath>
             </svg>
           </div>
 
