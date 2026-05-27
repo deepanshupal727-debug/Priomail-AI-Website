@@ -70,6 +70,20 @@ html, body {
   letter-spacing: -0.04em;
 }
 
+/* Brand wordmark — matches the official "PrioMail AI" logo treatment */
+.pm-wordmark {
+  font-family: 'Cabinet Grotesk', 'Manrope', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #ffffff 0%, #f3eaff 55%, #c4a8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(181, 148, 255, 0.35))
+          drop-shadow(0 2px 12px rgba(124, 92, 255, 0.22));
+}
+
 .font-mono-d {
   font-family: 'JetBrains Mono', monospace;
 }

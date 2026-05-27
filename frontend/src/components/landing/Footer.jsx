@@ -74,7 +74,7 @@ export default function Footer() {
               <div className="w-9 h-9 rounded-xl bg-[#1a1424] border border-primary/30 flex items-center justify-center group-hover:border-primary/60 transition-colors" data-testid="footer-logo-mark">
                 <Zap className="w-4 h-4 text-primary" strokeWidth={2.5} />
               </div>
-              <span className="font-display text-xl tracking-tight">PrioMail AI</span>
+              <span className="pm-wordmark text-xl tracking-tight">PrioMail AI</span>
             </a>
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
               AI-powered email priority intelligence. Built for inboxes that move fast.
