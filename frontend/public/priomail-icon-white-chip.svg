@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="PrioMail AI">
+  <!-- Solid WHITE chip - inverted variant. Use on coloured/photo backgrounds -->
+  <rect x="32" y="32" width="448" height="448" rx="112" ry="112" fill="#ffffff"/>
+  <g transform="translate(176 110) scale(1.6)">
+    <path d="M58 8 L24 86 L46 86 L40 152 L78 70 L54 70 L58 8 Z"
+          fill="#0d0820"/>
+  </g>
+</svg>
