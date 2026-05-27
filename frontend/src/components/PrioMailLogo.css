@@ -1,421 +1,119 @@
-/* ---------- PrioMail AI animated 3D logo ---------- */
+/* ============================================
+   PrioMail AI logo — exact original design
+   + ONE animation: auto-filling living bolt
+   ============================================ */
 
 .pm-stage {
     --logo-size: 260px;
-    --capsule-w: var(--logo-size);
+    --capsule-w: calc(var(--logo-size) * 0.6);
     --capsule-h: var(--logo-size);
-    --capsule-radius: calc(var(--logo-size) * 0.22);
-    --bolt-violet: #8b5cff;
-    --bolt-violet-bright: #b594ff;
-    --capsule-bg-1: #1a1330;
-    --capsule-bg-2: #0d0820;
-    --capsule-edge: #2a1f50;
+    --capsule-radius: calc(var(--logo-size) * 0.26);
 
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: calc(var(--logo-size) * 0.18);
+    gap: calc(var(--logo-size) * 0.22);
     perspective: 1000px;
     user-select: none;
 }
 
-/* ---- The interactive card / tilt container ---- */
+/* ----- Card / tilt wrapper ----- */
 .pm-card {
     --rx: 0deg;
     --ry: 0deg;
-    --mx: 50%;
-    --my: 50%;
 
     position: relative;
     width: var(--capsule-w);
     height: var(--capsule-h);
     transform-style: preserve-3d;
     transform: rotateX(var(--rx)) rotateY(var(--ry));
-    transition:
-        transform 280ms cubic-bezier(0.2, 0.9, 0.25, 1.1),
-        filter 400ms ease;
+    transition: transform 320ms cubic-bezier(0.2, 0.9, 0.25, 1.1);
     cursor: pointer;
     outline: none;
-    animation: pm-float 6s ease-in-out infinite;
-}
-
-.pm-card:focus-visible {
-    filter: drop-shadow(0 0 14px rgba(139, 92, 255, 0.6));
 }
 
 .pm-card:active {
     transform: rotateX(var(--rx)) rotateY(var(--ry)) scale(0.97);
 }
 
-@keyframes pm-float {
+/* tiny extra flash if user clicks */
+.pm-card.is-pinged .pm-bolt-fill-live {
+    animation:
+        pm-fill-loop 2.4s ease-in-out infinite,
+        pm-fill-ping 700ms ease-out;
+}
+
+@keyframes pm-fill-ping {
     0%,
     100% {
-        translate: 0 0;
+        filter: none;
     }
-    50% {
-        translate: 0 -6px;
-    }
-}
-
-/* ---- Ambient glow halo behind the capsule ---- */
-.pm-ambient {
-    position: absolute;
-    inset: -22%;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle at 50% 55%,
-        rgba(139, 92, 255, 0.45) 0%,
-        rgba(139, 92, 255, 0.18) 28%,
-        rgba(139, 92, 255, 0) 60%
-    );
-    filter: blur(8px);
-    z-index: 0;
-    animation: pm-pulse 3.4s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes pm-pulse {
-    0%,
-    100% {
-        opacity: 0.7;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.08);
+    40% {
+        filter: drop-shadow(0 0 18px rgba(181, 148, 255, 0.95))
+            brightness(1.4);
     }
 }
 
-/* ---- Capsule (the dark rounded rectangle) ---- */
+/* ----- Pill capsule (exact original look) ----- */
 .pm-capsule {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: var(--capsule-radius);
-    transform-style: preserve-3d;
-    z-index: 1;
-    /* multi-layer shadow gives real "3D" depth */
+    background: #1a1330;
     box-shadow:
-        0 30px 60px -20px rgba(20, 8, 60, 0.85),
-        0 18px 30px -16px rgba(139, 92, 255, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06),
-        inset 0 -2px 12px rgba(0, 0, 0, 0.6);
-    background: linear-gradient(
-        160deg,
-        var(--capsule-bg-1) 0%,
-        var(--capsule-bg-2) 100%
-    );
+        0 24px 50px -22px rgba(20, 8, 60, 0.75),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
     overflow: hidden;
 }
 
-.pm-capsule-face {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    overflow: hidden;
-    transform: translateZ(20px);
-}
-
-/* inner subtle gradient depth */
-.pm-capsule-inner {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-            ellipse at 50% 18%,
-            rgba(139, 92, 255, 0.18) 0%,
-            rgba(139, 92, 255, 0) 55%
-        ),
-        radial-gradient(
-            ellipse at 50% 110%,
-            rgba(20, 8, 60, 0.8) 0%,
-            rgba(20, 8, 60, 0) 60%
-        );
-    pointer-events: none;
-}
-
-/* moving specular highlight = "live 3D glass" */
-.pm-specular {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        circle at var(--mx) var(--my),
-        rgba(255, 255, 255, 0.18) 0%,
-        rgba(255, 255, 255, 0.06) 20%,
-        rgba(255, 255, 255, 0) 45%
-    );
-    mix-blend-mode: screen;
-    pointer-events: none;
-    transition: background 120ms linear;
-}
-
-/* faint grain for premium feel */
-.pm-noise {
-    position: absolute;
-    inset: 0;
-    opacity: 0.07;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
-    mix-blend-mode: overlay;
-}
-
-/* outer rim light */
-.pm-rim {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 30%),
-        linear-gradient(0deg, rgba(139, 92, 255, 0.18), transparent 35%);
-    box-shadow: inset 0 0 0 1px rgba(139, 92, 255, 0.22);
-    mix-blend-mode: screen;
-}
-
-/* ---- The letter-M / bolt SVG ---- */
+/* ----- The bolt SVG ----- */
 .pm-bolt {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 56%;
-    height: 56%;
-    transform: translate(-50%, -50%) translateZ(40px);
-    overflow: visible;
-    filter: drop-shadow(0 0 14px rgba(139, 92, 255, 0.6));
-    animation: pm-bolt-glow 2.6s ease-in-out infinite;
-}
-
-@keyframes pm-bolt-glow {
-    0%,
-    100% {
-        filter: drop-shadow(0 0 8px rgba(139, 92, 255, 0.4));
-    }
-    50% {
-        filter: drop-shadow(0 0 18px rgba(181, 148, 255, 0.85));
-    }
-}
-
-.pm-bolt-base {
-    /* base outline of the zigzag M - always visible */
-}
-
-/* Continuously pulsing layer = "live" filling effect */
-.pm-bolt-pulse {
-    opacity: 0;
-    animation: pm-bolt-pulse 2.4s ease-in-out infinite;
-    transform-origin: center;
-}
-
-@keyframes pm-bolt-pulse {
-    0%,
-    100% {
-        opacity: 0;
-        stroke-width: 9;
-    }
-    50% {
-        opacity: 1;
-        stroke-width: 12;
-    }
-}
-
-/* white-bright charge layer revealed on click */
-.pm-bolt-fill {
-    opacity: 0;
-    transition: opacity 380ms ease;
-    mix-blend-mode: screen;
-}
-
-/* trace-line that "draws" along the M shape on click */
-.pm-bolt-trace {
-    stroke-dasharray: 360;
-    stroke-dashoffset: 360;
-    opacity: 0;
-}
-
-/* shimmer sweep across the bolt */
-.pm-bolt-shimmer {
-    opacity: 0;
-    transform: translateX(0);
-}
-
-/* ---- CHARGED state (on click) ---- */
-.pm-card.is-charging .pm-bolt-fill {
-    opacity: 1;
-    animation: pm-bolt-fill-rise 900ms cubic-bezier(0.2, 0.8, 0.25, 1) both;
-}
-
-.pm-card.is-charging .pm-bolt-base {
-    animation: pm-bolt-stroke-flash 900ms ease-out;
-}
-
-.pm-card.is-charging .pm-bolt {
-    animation: pm-bolt-glow-burst 1.2s ease-out;
-}
-
-.pm-card.is-charging .pm-bolt-trace {
-    opacity: 1;
-    animation: pm-bolt-trace-draw 900ms ease-out;
-}
-
-.pm-card.is-charging .pm-ambient {
-    animation: pm-ambient-burst 1.2s ease-out;
-}
-
-@keyframes pm-bolt-trace-draw {
-    0% {
-        opacity: 0;
-        stroke-dashoffset: 360;
-    }
-    20% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes pm-bolt-fill-rise {
-    0% {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    35% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0.9;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pm-bolt-stroke-flash {
-    0% {
-        filter: drop-shadow(0 0 0 rgba(139, 92, 255, 0));
-    }
-    35% {
-        filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.9));
-    }
-    100% {
-        filter: drop-shadow(0 0 0 rgba(139, 92, 255, 0));
-    }
-}
-
-@keyframes pm-bolt-glow-burst {
-    0% {
-        filter: drop-shadow(0 0 6px rgba(139, 92, 255, 0.5));
-    }
-    40% {
-        filter: drop-shadow(0 0 26px rgba(181, 148, 255, 1))
-            drop-shadow(0 0 44px rgba(124, 92, 255, 0.95));
-    }
-    100% {
-        filter: drop-shadow(0 0 10px rgba(139, 92, 255, 0.55));
-    }
-}
-
-@keyframes pm-shimmer-sweep {
-    0% {
-        opacity: 0;
-        transform: translateX(0);
-    }
-    20% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(140px);
-    }
-}
-
-@keyframes pm-ambient-burst {
-    0% {
-        opacity: 0.7;
-        transform: scale(1);
-    }
-    40% {
-        opacity: 1;
-        transform: scale(1.35);
-    }
-    100% {
-        opacity: 0.7;
-        transform: scale(1);
-    }
-}
-
-/* ---- Sparks ---- */
-.pm-sparks {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.pm-spark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        #d9c4ff 0%,
-        #8b5cff 45%,
-        rgba(139, 92, 255, 0) 100%
-    );
-    box-shadow: 0 0 12px 2px rgba(139, 92, 255, 0.85);
+    width: 42%;
+    height: 70%;
     transform: translate(-50%, -50%);
-    animation: pm-spark-fly 950ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
-    opacity: 0;
+    overflow: visible;
 }
 
-@keyframes pm-spark-fly {
+.pm-bolt-outline {
+    fill: transparent;
+}
+
+/* ===== The ONLY animation: living auto-fill ===== */
+.pm-bolt-fill-live {
+    /* clip the fill so it rises from bottom -> top -> back down */
+    opacity: 0;
+    animation: pm-fill-loop 2.4s ease-in-out infinite;
+}
+
+@keyframes pm-fill-loop {
     0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.4);
     }
-    20% {
+    50% {
         opacity: 1;
     }
     100% {
         opacity: 0;
-        transform: translate(calc(-50% + var(--sx)), calc(-50% + var(--sy)))
-            scale(0.3);
     }
 }
 
-/* ---- Wordmark ---- */
+/* ----- Wordmark (exact original styling) ----- */
 .pm-wordmark {
-    display: flex;
-    align-items: baseline;
-    gap: 0.35em;
     font-family: "Inter", "Helvetica Neue", sans-serif;
     font-weight: 200;
-    letter-spacing: 0.01em;
-    font-size: calc(var(--logo-size) * 0.24);
-    color: #f3eefb;
-    text-shadow: 0 2px 24px rgba(139, 92, 255, 0.18);
+    letter-spacing: 0.005em;
+    font-size: calc(var(--logo-size) * 0.26);
+    color: #ffffff;
+    line-height: 1;
 }
 
-.pm-wordmark-text {
-    background: linear-gradient(180deg, #ffffff 0%, #d6c8ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.pm-wordmark-ai {
-    background: linear-gradient(180deg, #ffffff 0%, #a585ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Reduce motion respect */
 @media (prefers-reduced-motion: reduce) {
-    .pm-card,
-    .pm-ambient,
-    .pm-bolt {
-        animation: none !important;
+    .pm-bolt-fill-live {
+        animation: none;
+        opacity: 0.6;
     }
 }
