@@ -114,53 +114,67 @@ export const PrioMailLogo = ({ size = 260, showWordmark = true }) => {
               data-testid="priomail-logo-bolt"
             >
               <defs>
-                <linearGradient id="boltStroke" x1="0" y1="0" x2="1" y2="1">
+                {/* Default filled-purple gradient (deep -> bright violet) */}
+                <linearGradient id="boltFillBase" x1="0" y1="0" x2="0.6" y2="1">
                   <stop offset="0%" stopColor="#b594ff" />
-                  <stop offset="50%" stopColor="#9a73ff" />
+                  <stop offset="55%" stopColor="#8b5cff" />
+                  <stop offset="100%" stopColor="#5b3bd6" />
+                </linearGradient>
+                {/* Charged/clicked gradient - shifts to bright pink-violet */}
+                <linearGradient id="boltFillCharged" x1="0" y1="0" x2="0.6" y2="1">
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="40%" stopColor="#d9b6ff" />
                   <stop offset="100%" stopColor="#7c5cff" />
                 </linearGradient>
-                {/* Fill uses the SAME violet palette, just brighter/saturated */}
-                <linearGradient id="boltFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#b594ff" />
-                  <stop offset="50%" stopColor="#8b5cff" />
-                  <stop offset="100%" stopColor="#6a3eff" />
+                {/* Subtle inner highlight */}
+                <linearGradient id="boltHighlight" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.35" />
+                  <stop offset="55%" stopColor="#ffffff" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="boltShimmer" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#b594ff" stopOpacity="0" />
-                  <stop offset="50%" stopColor="#e9defc" stopOpacity="0.75" />
-                  <stop offset="100%" stopColor="#b594ff" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                  <stop offset="50%" stopColor="#ffffff" stopOpacity="0.65" />
+                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
                 </linearGradient>
                 <filter id="boltGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feGaussianBlur stdDeviation="2.2" result="blur" />
                   <feMerge>
                     <feMergeNode in="blur" />
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
                 <clipPath id="boltClip">
-                  <path d="M62 8 L20 84 L44 84 L36 152 L80 76 L56 76 L62 8 Z" />
+                  <path d="M15 150 L20 18 L50 95 L80 18 L85 150 L70 150 L65 60 L50 115 L35 60 L30 150 Z" />
                 </clipPath>
               </defs>
 
-              {/* Bolt outline path - more angular "M-ish" zigzag */}
+              {/* Letter-M shape, solid purple fill by default */}
               <path
                 className="pm-bolt-path"
-                d="M62 8 L20 84 L44 84 L36 152 L80 76 L56 76 L62 8 Z"
-                stroke="url(#boltStroke)"
-                strokeWidth="5"
+                d="M15 150 L20 18 L50 95 L80 18 L85 150 L70 150 L65 60 L50 115 L35 60 L30 150 Z"
+                fill="url(#boltFillBase)"
+                stroke="#c4a8ff"
+                strokeWidth="1.2"
                 strokeLinejoin="round"
-                strokeLinecap="round"
                 filter="url(#boltGlow)"
               />
 
-              {/* Fill layer revealed on click - same violet, just intensified */}
+              {/* Charged-state overlay (becomes visible on click) */}
               <path
                 className="pm-bolt-fill"
-                d="M62 8 L20 84 L44 84 L36 152 L80 76 L56 76 L62 8 Z"
-                fill="url(#boltFill)"
+                d="M15 150 L20 18 L50 95 L80 18 L85 150 L70 150 L65 60 L50 115 L35 60 L30 150 Z"
+                fill="url(#boltFillCharged)"
               />
 
-              {/* Shimmer sweep clipped to the bolt - violet shimmer, not white */}
+              {/* Inner top highlight for premium feel */}
+              <path
+                className="pm-bolt-highlight"
+                d="M15 150 L20 18 L50 95 L80 18 L85 150 L70 150 L65 60 L50 115 L35 60 L30 150 Z"
+                fill="url(#boltHighlight)"
+                style={{ pointerEvents: "none" }}
+              />
+
+              {/* Shimmer sweep clipped to the bolt */}
               <g className="pm-bolt-shimmer" clipPath="url(#boltClip)">
                 <rect x="-50" y="0" width="40" height="160" fill="url(#boltShimmer)" />
               </g>

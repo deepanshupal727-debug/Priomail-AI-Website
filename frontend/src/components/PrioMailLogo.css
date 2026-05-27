@@ -2,9 +2,9 @@
 
 .pm-stage {
     --logo-size: 260px;
-    --capsule-w: calc(var(--logo-size) * 0.58);
+    --capsule-w: var(--logo-size);
     --capsule-h: var(--logo-size);
-    --capsule-radius: calc(var(--logo-size) * 0.13);
+    --capsule-radius: calc(var(--logo-size) * 0.22);
     --bolt-violet: #8b5cff;
     --bolt-violet-bright: #b594ff;
     --capsule-bg-1: #1a1330;
@@ -170,17 +170,17 @@
     mix-blend-mode: screen;
 }
 
-/* ---- The lightning bolt SVG ---- */
+/* ---- The letter-M / bolt SVG ---- */
 .pm-bolt {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 38%;
-    height: 60%;
+    width: 56%;
+    height: 56%;
     transform: translate(-50%, -50%) translateZ(40px);
     overflow: visible;
-    filter: drop-shadow(0 0 10px rgba(139, 92, 255, 0.55));
-    animation: pm-bolt-glow 2.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 14px rgba(139, 92, 255, 0.6));
+    animation: pm-bolt-glow 2.6s ease-in-out infinite;
 }
 
 @keyframes pm-bolt-glow {
@@ -194,17 +194,21 @@
 }
 
 .pm-bolt-path {
-    fill: transparent;
     transition:
-        stroke-width 300ms ease,
-        opacity 300ms ease;
+        opacity 300ms ease,
+        transform 300ms ease;
 }
 
-/* fill layer hidden until charged */
+/* charged colour overlay - hidden until click */
 .pm-bolt-fill {
     opacity: 0;
     transform-origin: center;
     transition: opacity 380ms ease;
+}
+
+.pm-bolt-highlight {
+    pointer-events: none;
+    mix-blend-mode: screen;
 }
 
 /* shimmer sweep across the bolt */
@@ -253,15 +257,13 @@
 
 @keyframes pm-bolt-stroke-flash {
     0% {
-        stroke: #b594ff;
         filter: drop-shadow(0 0 0 rgba(139, 92, 255, 0));
     }
     35% {
-        stroke: #d9c4ff;
-        filter: drop-shadow(0 0 16px rgba(181, 148, 255, 0.95));
+        filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.9));
     }
     100% {
-        stroke: #b594ff;
+        filter: drop-shadow(0 0 0 rgba(139, 92, 255, 0));
     }
 }
 
