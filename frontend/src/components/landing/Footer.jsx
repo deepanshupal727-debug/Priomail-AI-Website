@@ -135,7 +135,9 @@ export default function Footer() {
         <div className="border-t border-border">
           <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-muted-foreground">© 2026 PrioMail AI. All rights reserved.</p>
-            <p className="text-xs text-muted-foreground font-mono-d">Made with discipline · Built on Emergent</p>
+            <p className="text-xs text-muted-foreground font-mono-d" data-testid="footer-tagline">
+              Made with <span className="text-red-500" aria-label="love">❤️</span> in India
+            </p>
           </div>
         </div>
       </div>
