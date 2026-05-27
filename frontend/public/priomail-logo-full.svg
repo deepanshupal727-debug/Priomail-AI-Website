@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1280" width="1024" height="1280" role="img" aria-label="PrioMail AI">
+  <defs>
+    <linearGradient id="capBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1330"/>
+      <stop offset="100%" stop-color="#0d0820"/>
+    </linearGradient>
+    <linearGradient id="boltStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b594ff"/>
+      <stop offset="100%" stop-color="#7c5cff"/>
+    </linearGradient>
+    <linearGradient id="boltFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b594ff"/>
+      <stop offset="100%" stop-color="#7c5cff"/>
+    </linearGradient>
+    <linearGradient id="wmGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#f3eaff"/>
+      <stop offset="100%" stop-color="#c4a8ff"/>
+    </linearGradient>
+    <filter id="boltGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="wmGlow" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Icon block (centered horizontally, at top) -->
+  <g transform="translate(256 80)">
+    <rect x="0" y="0" width="512" height="512" rx="128" ry="128" fill="url(#capBg)"
+          stroke="rgba(139,92,255,0.25)" stroke-width="2"/>
+    <rect x="0" y="0" width="512" height="90" rx="128" ry="128" fill="rgba(255,255,255,0.03)"/>
+
+    <g transform="translate(165 120) scale(1.8)" filter="url(#boltGlow)">
+      <path d="M58 8 L24 86 L46 86 L40 152 L78 70 L54 70 L58 8 Z"
+            fill="url(#boltFill)"
+            stroke="url(#boltStroke)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <g filter="url(#wmGlow)">
+    <text x="512" y="1080" text-anchor="middle"
+          font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+          font-weight="700" font-size="148"
+          letter-spacing="-1.5"
+          fill="url(#wmGrad)">PrioMail AI</text>
+  </g>
+</svg>
